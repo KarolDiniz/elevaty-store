@@ -107,10 +107,8 @@ const Produto = () => {
                         <TableRow></TableRow>
                       </TableHead>
                       <TableRow onClick={() => handleRowClick(product)}>
-                        <TableCell style={{ color: "#6357F1", textAlign: "left" }}>
-                          <Typography variant="body2" style={{ fontWeight: "bold" }}>
-                            {product.id}. {product.name}
-                          </Typography>
+                        <TableCell style={{ color: "#6357F1", textAlign: "center" }}>
+                          <Typography variant="body2" style={{ fontWeight: "bold" }}> {product.name}</Typography>
                           <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                             <img
                               src={product.image_url || "src/assets/img/package-box_6046583.png"}
