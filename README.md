@@ -20,8 +20,8 @@ Após a execução bem-sucedida do projeto, acesse a aplicação no seu navegado
 # Credenciais de Acesso
 Ao acessar a aplicação, utilize as seguintes credenciais para efetuar o login:
 
-Usuário: admin
-Senha: admin
+1. Usuário: admin
+2. Senha: admin
 
 # Navegação na Aplicação
 1. No menu superior, clique em Produtos para visualizar a lista de produtos.
