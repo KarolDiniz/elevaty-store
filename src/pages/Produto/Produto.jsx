@@ -19,6 +19,7 @@ const Produto = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filterValue, setFilterValue] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -58,6 +59,14 @@ const Produto = () => {
     handleCloseModal();
   };
 
+  const handleCardMouseEnter = (index) => {
+    setHoveredIndex(index);
+  };
+
+  const handleCardMouseLeave = () => {
+    setHoveredIndex(null);
+  };
+
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(filterValue.toLowerCase())
   );
@@ -83,22 +92,22 @@ const Produto = () => {
       ) : (
         <Paper style={{ background: "#ffffff", padding: "52px", borderRadius: "10px", marginTop: "1.5rem", marginLeft: "5rem", marginRight: "5rem", minWidth: "20%", minHeight: "20%" }}>
           <Grid container spacing={3}>
-            {filteredProducts.map((product) => (
+            {filteredProducts.map((product, index) => (
               <Grid key={product.id} item xs={12} sm={6} md={4} lg={4}>
                 <Paper
+                  onMouseEnter={() => handleCardMouseEnter(index)}
+                  onMouseLeave={handleCardMouseLeave}
                   style={{
                     borderRadius: "1rem",
                     marginRight: "5rem",
                     marginLeft: "5rem",
-                    maxHeight: "250px",
-                    maxWidth: "500px",
+                    maxHeight: "300px", 
+                    maxWidth: "600px",  
+                    overflow: "hidden",
                     backgroundColor: "#edecf5",
                     transition: "transform 0.3s ease-in-out, background-color 0.3s, color 0.3s",
-                    "&:hover": {
-                      transform: "scale(1.05)",
-                      backgroundColor: "#6357F1",
-                      color: "#000",
-                    },
+                    transform: hoveredIndex === index ? "scale(1.15)" : "scale(1)",
+                    color: hoveredIndex === index ? "#000" : "#6357F1",
                   }}
                 >
                   <TableContainer>
