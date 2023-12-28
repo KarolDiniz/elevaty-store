@@ -159,14 +159,11 @@ const Produto = () => {
         </Table>
       </TableContainer>
     )}
-    <Button variant="contained" color="primary" onClick={handleCloseModal} style={{ marginTop: "1rem", marginLeft: "15rem" }}>
+    <Button variant="contained" color="primary" onClick={handleCloseModal} style={{ marginTop: "1rem" }}>
       Close
     </Button>
     <Button
-      variant="outlined"
-      backgroundColor="#cf3d3d"
-      onClick={handleRemoveProduct}
-      style={{ marginTop: "1rem" }}
+      variant="outlined" onClick={handleRemoveProduct} style={{ marginTop: "1rem" ,color: "#ff0000", borderColor: "#ff0000", marginLeft: "20rem"}}
     >
       Remover
     </Button>
