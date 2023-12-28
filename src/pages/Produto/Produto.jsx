@@ -136,30 +136,42 @@ const Produto = () => {
         </Paper>
       )}
 
-      <Modal open={isModalOpen} onClose={handleCloseModal}>
-        <Paper style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", padding: "40px", borderRadius: "1rem" }}>
-          <Typography variant="h5" style={{ textAlign: "center", marginBottom: "2rem", fontWeight: "bold" }}> Product Details</Typography>
-          {selectedProduct && (
-            <div style={{ padding: "16px", backgroundColor: "#edecf5"}}>
-              <Typography style={{ marginBottom: "8px", fontWeight: "bold" }}>ID: {selectedProduct.id}</Typography>
-              <Typography style={{ marginBottom: "8px" }}>Name: {selectedProduct.name}</Typography>
-              <Typography style={{ marginBottom: "8px" }}>Taxes: {selectedProduct.taxes}</Typography>
-              <Typography>Price: {selectedProduct.price}</Typography>
-            </div>
-          )}
-          <Button variant="contained" color="primary" onClick={handleCloseModal} style={{ marginTop: "1rem", marginLeft: "15rem" }}>
-            Close
-          </Button>
-          <Button
-            variant="outlined"
-            backgroundColor="#cf3d3d"
-            onClick={handleRemoveProduct}
-            style={{ marginTop: "1rem" }}
-          >
-            Remover
-          </Button>
-        </Paper>
-      </Modal>
+<Modal open={isModalOpen} onClose={handleCloseModal}>
+  <Paper style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", padding: "40px", borderRadius: "1rem" }}>
+    <Typography variant="h5" style={{ textAlign: "center", marginBottom: "2rem", fontWeight: "bold" }}> Product Details</Typography>
+    {selectedProduct && (
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Taxes</TableCell>
+              <TableCell>Price</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableRow>
+            <TableCell>{selectedProduct.id}</TableCell>
+            <TableCell>{selectedProduct.name}</TableCell>
+            <TableCell>{selectedProduct.taxes}</TableCell>
+            <TableCell>{selectedProduct.price}</TableCell>
+          </TableRow>
+        </Table>
+      </TableContainer>
+    )}
+    <Button variant="contained" color="primary" onClick={handleCloseModal} style={{ marginTop: "1rem", marginLeft: "15rem" }}>
+      Close
+    </Button>
+    <Button
+      variant="outlined"
+      backgroundColor="#cf3d3d"
+      onClick={handleRemoveProduct}
+      style={{ marginTop: "1rem" }}
+    >
+      Remover
+    </Button>
+  </Paper>
+</Modal>
     </Grid>
   );
 };
