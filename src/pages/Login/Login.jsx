@@ -19,20 +19,14 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    console.log("Username:", username);
-    console.log("Password:", password);
-
     const isAdmin = username.toLowerCase() === "admin" && password.toLowerCase() === "admin";
 
     if (isAdmin) {
-      return <Link to="/home" />;
+      navigate("/home");
     } else {
       setOpenSnackbar(true);
-      return null;
     }
   };
-  
-  
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
@@ -46,7 +40,7 @@ const Login = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "90vh", // Viewport height
+        height: "90vh",
       }}
       disableGutters
     >
@@ -119,11 +113,9 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 style={{ marginBottom: "0.5rem", width: "100%" }}
               />
-              <Link to="/home" style={{ textDecoration: "none", width: "100%" }}>
-                <Button variant="contained" color="primary" onClick={handleLogin} style={{ width: "100%" }}>
+                <Button variant="contained" color="primary" style={{ width: "100%" }} onClick={handleLogin}>
                   Login
                 </Button>
-              </Link>
               <Snackbar
                 open={openSnackbar}
                 autoHideDuration={6000}
@@ -160,7 +152,7 @@ const Login = () => {
                 }}
               >
                 Place your orders with<br />
-                more ease and efficiency 
+                more ease and efficiency
               </Typography>
             </Box>
           </Box>
