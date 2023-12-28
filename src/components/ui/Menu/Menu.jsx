@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import Logo from "@img/ecommerce_10185772.png";
+import Logo from "@img/store-logo-menu.png";
 import products from "@img/box_6452366.png";
 import home from "@img/store_6452554.png";
 import like from "@img/like_6452430.png";
