@@ -2,6 +2,9 @@
 
 Este projeto foi desenvolvido como parte de um desafio técnico, apresentando uma aplicação web para visualização e gerenciamento de produtos. Siga as instruções abaixo para configurar e executar o projeto em seu ambiente local.
 
+# Vídeo demonstrativo
+https://youtu.be/-ZGUoR1qB5k
+
 # Instruções de Instalação
 
 Clone o Repositório:
