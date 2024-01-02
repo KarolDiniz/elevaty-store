@@ -19,6 +19,7 @@ const Produto = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filterValue, setFilterValue] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -58,6 +59,14 @@ const Produto = () => {
     handleCloseModal();
   };
 
+  const handleCardMouseEnter = (index) => {
+    setHoveredIndex(index);
+  };
+
+  const handleCardMouseLeave = () => {
+    setHoveredIndex(null);
+  };
+
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(filterValue.toLowerCase())
   );
@@ -83,22 +92,22 @@ const Produto = () => {
       ) : (
         <Paper style={{ background: "#ffffff", padding: "52px", borderRadius: "10px", marginTop: "1.5rem", marginLeft: "5rem", marginRight: "5rem", minWidth: "20%", minHeight: "20%" }}>
           <Grid container spacing={3}>
-            {filteredProducts.map((product) => (
+            {filteredProducts.map((product, index) => (
               <Grid key={product.id} item xs={12} sm={6} md={4} lg={4}>
                 <Paper
+                  onMouseEnter={() => handleCardMouseEnter(index)}
+                  onMouseLeave={handleCardMouseLeave}
                   style={{
                     borderRadius: "1rem",
                     marginRight: "5rem",
                     marginLeft: "5rem",
-                    maxHeight: "250px",
-                    maxWidth: "500px",
+                    maxHeight: "300px", 
+                    maxWidth: "600px",  
+                    overflow: "hidden",
                     backgroundColor: "#edecf5",
                     transition: "transform 0.3s ease-in-out, background-color 0.3s, color 0.3s",
-                    "&:hover": {
-                      transform: "scale(1.05)",
-                      backgroundColor: "#6357F1",
-                      color: "#000",
-                    },
+                    transform: hoveredIndex === index ? "scale(1.15)" : "scale(1)",
+                    color: hoveredIndex === index ? "#000" : "#6357F1",
                   }}
                 >
                   <TableContainer>
@@ -107,10 +116,8 @@ const Produto = () => {
                         <TableRow></TableRow>
                       </TableHead>
                       <TableRow onClick={() => handleRowClick(product)}>
-                        <TableCell style={{ color: "#6357F1", textAlign: "left" }}>
-                          <Typography variant="body2" style={{ fontWeight: "bold" }}>
-                            {product.id}. {product.name}
-                          </Typography>
+                        <TableCell style={{ color: "#6357F1", textAlign: "center" }}>
+                          <Typography variant="body2" style={{ fontWeight: "bold" }}> {product.name}</Typography>
                           <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                             <img
                               src={product.image_url || "src/assets/img/package-box_6046583.png"}
@@ -129,30 +136,39 @@ const Produto = () => {
         </Paper>
       )}
 
-      <Modal open={isModalOpen} onClose={handleCloseModal}>
-        <Paper style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", padding: "40px", borderRadius: "1rem" }}>
-          <Typography variant="h5" style={{ textAlign: "center", marginBottom: "2rem", fontWeight: "bold" }}> Product Details</Typography>
-          {selectedProduct && (
-            <div style={{ padding: "16px", backgroundColor: "#edecf5"}}>
-              <Typography style={{ marginBottom: "8px", fontWeight: "bold" }}>ID: {selectedProduct.id}</Typography>
-              <Typography style={{ marginBottom: "8px" }}>Name: {selectedProduct.name}</Typography>
-              <Typography style={{ marginBottom: "8px" }}>Taxes: {selectedProduct.taxes}</Typography>
-              <Typography>Price: {selectedProduct.price}</Typography>
-            </div>
-          )}
-          <Button variant="contained" color="primary" onClick={handleCloseModal} style={{ marginTop: "1rem", marginLeft: "15rem" }}>
-            Close
-          </Button>
-          <Button
-            variant="outlined"
-            backgroundColor="#cf3d3d"
-            onClick={handleRemoveProduct}
-            style={{ marginTop: "1rem" }}
-          >
-            Remover
-          </Button>
-        </Paper>
-      </Modal>
+<Modal open={isModalOpen} onClose={handleCloseModal}>
+  <Paper style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", padding: "40px", borderRadius: "1rem" }}>
+    <Typography variant="h5" style={{ textAlign: "center", marginBottom: "2rem", fontWeight: "bold" }}> Product Details</Typography>
+    {selectedProduct && (
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Taxes</TableCell>
+              <TableCell>Price</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableRow>
+            <TableCell>{selectedProduct.id}</TableCell>
+            <TableCell>{selectedProduct.name}</TableCell>
+            <TableCell>{selectedProduct.taxes}</TableCell>
+            <TableCell>{selectedProduct.price}</TableCell>
+          </TableRow>
+        </Table>
+      </TableContainer>
+    )}
+    <Button variant="contained" color="primary" onClick={handleCloseModal} style={{ marginTop: "1rem" }}>
+      Close
+    </Button>
+    <Button
+      variant="outlined" onClick={handleRemoveProduct} style={{ marginTop: "1rem" ,color: "#ff0000", borderColor: "#ff0000", marginLeft: "20rem"}}
+    >
+      Remover
+    </Button>
+  </Paper>
+</Modal>
     </Grid>
   );
 };
